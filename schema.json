@@ -1,0 +1,19 @@
+{
+  "type": "component",
+  "metadata": {},
+  "schema": {
+    "name": "bb-plugin-TabContainer",
+    "friendlyName": "Tab Container",
+    "description": "A Tab Container Compoenent for Budibase",
+    "icon": "FolderOutline",
+    "hasChildren": true,
+    "settings": [
+      {
+        "type": "text",
+        "key": "title",
+        "label": "Title",
+        "defaultValue": "New Tab"
+      }
+    ]
+  }
+}
