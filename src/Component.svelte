@@ -15,11 +15,6 @@
       $tabStore?.updateTab( id, title, icon ) 
   }
   
-  if (!nested)
-  {
-    $tabStore?.registerTab( id, title, icon );
-  }
-
   // If in the builder preview, show this Tab Container if a child is selected
   $: {
     if (
@@ -33,7 +28,10 @@
   } 
   
   onMount ( () =>  { 
-    console.log(nested)
+    if (!nested)
+    {
+      $tabStore?.registerTab( id, title, icon );
+    }
   })
 
   onDestroy ( () => {
@@ -42,7 +40,7 @@
 </script>
 
 {#if !tabStore}
-  <p> Tab Container must be placed inside a Tabs Component </p>
+  <p> Tab Container must be placed inside a Tabs Component. </p>
 {:else if nested}
   <p> Tab Containers cannot be nested. They need to be top level in a Tabs Component. </p>
 {:else if $tabStore?.selectedTab === id }
