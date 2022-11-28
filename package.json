@@ -1,7 +1,8 @@
 {
   "name": "bb-plugin-TabContainer",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A Tab Container Compoenent for Budibase",
+  "author": "Michael Poirazi",
   "license": "MIT",
   "svelte": "index.js",
   "module": "dist/plugin.min.js",
