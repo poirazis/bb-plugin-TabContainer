@@ -1,29 +1,41 @@
 <script>
-  import { getContext, onMount, onDestroy } from "svelte"
+  import { getContext, onMount, onDestroy, setContext } from "svelte"
   export let title
+  export let icon 
   export const id = Math.random();
 
   const { styleable, builderStore, componentStore } = getContext("sdk")
   const component = getContext("component")
-
   const tabStore = getContext("tabStore")
 
-  $:  { $tabStore?.updateTab( id, title ) }
+  const nested = getContext("topLevel")
+  if (!nested) setContext("topLevel", 1)
+
+  $: {
+      $tabStore?.updateTab( id, title, icon ) 
+  }
   
+  if (!nested)
+  {
+    $tabStore?.registerTab( id, title, icon );
+  }
+
   // If in the builder preview, show this Tab Container if a child is selected
   $: {
-      if (
-        tabStore && 
-        $builderStore.inBuilder &&
-        $componentStore.selectedComponentPath?.includes($component.id)
-      ) {
-        $tabStore.selectedTab = id;
-      }
+    if (
+      !nested && 
+      tabStore && 
+      $builderStore.inBuilder &&
+      $componentStore.selectedComponentPath?.includes($component.id)
+    ) {
+      $tabStore.selectedTab = id;
     }
+  } 
   
   onMount ( () =>  { 
-    $tabStore?.registerTab( id, title ); 
+    console.log(nested)
   })
+
   onDestroy ( () => {
     $tabStore?.unregisterTab( id ); 
   })
@@ -31,9 +43,11 @@
 
 {#if !tabStore}
   <p> Tab Container must be placed inside a Tabs Component </p>
-{:else if $tabStore?.selectedTab === id}
+{:else if nested}
+  <p> Tab Containers cannot be nested. They need to be top level in a Tabs Component. </p>
+{:else if $tabStore?.selectedTab === id }
   <div use:styleable={$component.styles} class="container">
-      <slot />
+      <slot/> 
   </div>
 {/if}
 
