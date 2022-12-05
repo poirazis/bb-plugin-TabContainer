@@ -1,20 +1,19 @@
-# Bb-plugin-TabContainer
-This is a readme for your new Budibase plugin.
+# Budibase Tab Container
+
+This is the child component of a two part plugin. 
+You will also need the parent [Tabs plugin](https://github.com/poirazis/bb-plugin-Tabs)
 
 # Description
-A Tab Container Compoenent for Budibase
 
-Find out more about [Budibase](https://github.com/Budibase/budibase).
+Adds support for tabs in Budibase!
+
+![Alt text](birds.gif)
 
 ## Instructions
 
-To build your new  plugin run the following in your Budibase CLI:
-```
-budi plugins --build
-```
+1. [Import](https://docs.budibase.com/docs/custom-plugin) the Tab Container and Tabs plugins
+2. Add the Tabs component, and nest your Tab Containers within
+3. Give each of your Tab Containers a name and add any components you wish
+4. Tab Containers can also be given an icon
 
-You can also re-build everytime you make a change to your plugin with the command:
-```
-budi plugins --watch
-```
-
+![Alt text](tabs-screenshot.png)
